@@ -1,0 +1,40 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.outer{
+    display: grid;
+    justify-content: center;
+}
+
+.table-data-context{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.table-data-context p{
+    padding-top: 10px;
+}
+
+.table-data-context mat-icon{
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+/* Animation */
+.table-data-context mat-icon:hover{
+    color: red;
+    transform: scale(1.1);
+    transition: 0.2s all linear;
+}
