@@ -10,9 +10,9 @@
                     </form>
                 </div>
                 <div class="col-3">
-                    <form class="d-flex justify-content-start">
-                        <button class="btn btn-primary p-2">+ New Product</button>
-                    </form>
+                    <div class="d-flex justify-content-start">
+                        <button class="btn btn-primary p-2" (click)="openNewProductForm()">+ New Product</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                             <td>
                                 <div class="table-data-context">
                                     <mat-icon>delete</mat-icon>
-                                    <mat-icon>edit</mat-icon>
+                                    <mat-icon (click)="openUpdateProductForm()">edit</mat-icon>
                                 </div>
                             </td>
                         </tr>
