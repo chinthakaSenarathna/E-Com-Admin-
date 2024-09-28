@@ -1,12 +1,19 @@
 <div class="outer">
-    <div class="container">
+    <div class="">
         <h2>Products Management</h2>
         <hr/>
         <div class="raw mt-5">
-            <div class="colomn-1">
-                <form>
-                    <input type="search" placeholder="search here....." class="form-control">
-                </form>
+            <div class="colomn-12 d-flex flex-wrap gap-2">
+                <div class="col-6">
+                    <form>
+                        <input type="search" placeholder="search here....." class="form-control p-2">
+                    </form>
+                </div>
+                <div class="col-3">
+                    <form class="d-flex justify-content-start">
+                        <button class="btn btn-primary p-2">+ New Product</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="raw mt-5">
@@ -17,9 +24,10 @@
                             <th class="col-1">#Id</th>
                             <th class="col-1">Qty</th>
                             <th class="col-2">Unit Price</th>
-                            <th class="col-6">Description</th>
-                            <th class="col-1">IsAvailable</th>
+                            <th class="col-4">Description</th>
+                            <th class="col-2">IsAvailable</th>
                             <th class="col-1">Images</th>
+                            <th class="col-1">Tools</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,7 +35,7 @@
                             <td>
                                 <div class="table-data-context">
                                     <p>0001</p> &nbsp;
-                                    <mat-icon>content_copy</mat-icon>
+                                    <mat-icon style="font-size: 15px;">content_copy</mat-icon>
                                 </div>
                             </td>
                             <td>
@@ -37,23 +45,28 @@
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    Rs. 4500.00
+                                    $4500.00
                                 </div>
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, corrupti. Voluptatum repellendus est, 
-                                    nihil fugit ut facilis mollitia nulla? In reiciendis atque modi dignissimos, natus animi optio temporibus accusamus ducimus.
+                                    Product 01
                                 </div>
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    
+                                    Available
                                 </div>
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    
+                                    <mat-icon>photo_library</mat-icon>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-data-context">
+                                    <mat-icon>delete</mat-icon>
+                                    <mat-icon>edit</mat-icon>
                                 </div>
                             </td>
                         </tr>
