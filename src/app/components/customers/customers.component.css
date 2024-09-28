@@ -1,0 +1,37 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+/* Psuedo Class */
+:root{
+    --x-color: red;
+}
+
+.customers-table-data-context{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.customers-table-data-context mat-icon{
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+/* Animation */
+.customers-table-data-context mat-icon:hover{
+    color: red;
+    transform: scale(1.1);
+    transition: 0.2s all linear;
+}
