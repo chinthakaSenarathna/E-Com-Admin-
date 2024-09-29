@@ -23,7 +23,7 @@
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Reset</button>
-      <button mat-button type="submit" cdkFocusInitial>Create New Product</button>
+      <button mat-raised-button (click)="close()">Reset</button>
+      <button mat-raised-button type="submit" color="primary">Create New Product</button>
     </mat-dialog-actions>
 </form>

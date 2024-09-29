@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ProductService } from '../../../../service/product/product.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -12,8 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './new-product.component.css'
 })
 export class NewProductComponent {
+  readonly dialogRef = inject(MatDialogRef<NewProductComponent>);
+  readonly productService = inject(ProductService);
 
-  constructor(private productService:ProductService){}
+  // constructor(private productService:ProductService){}
 
   // model
   form = new FormGroup({
@@ -29,6 +31,14 @@ export class NewProductComponent {
       description: this.form.value.description
     }
 
-    this.productService.create(obj)
+    this.productService.create(obj).subscribe(response => {
+      this.dialogRef.close(true);
+    }, error => {
+      console.log(error?.error?.message)
+    })
+  }
+
+  close(){
+    this.dialogRef.close(false);
   }
 }

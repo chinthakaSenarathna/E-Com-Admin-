@@ -18,4 +18,12 @@ export class ProductService {
       description: obj.description
     });
   }
+
+  update(obj:any,id:string):Observable<any>{
+    return this.http.put(`${this.baseUrl}/${id}`, {
+      qty: obj.qty,
+      unitPrice: obj.unitPrice,
+      description: obj.description
+    });
+  }
 }
