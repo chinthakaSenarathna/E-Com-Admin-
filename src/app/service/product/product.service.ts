@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class ProductService {
     });
   }
 
-  update(obj:any,id:string):Observable<any>{
+  update(obj:any, id:string):Observable<any>{
     return this.http.put(`${this.baseUrl}/${id}`, {
       qty: obj.qty,
       unitPrice: obj.unitPrice,
@@ -29,5 +29,16 @@ export class ProductService {
 
   delete(id:string):Observable<any>{
     return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  getAll(searchText:string, page:number, size:number):Observable<any>{
+
+    // create HttpParams object
+    let params = new HttpParams()
+      .set('searchText',searchText)
+      .set('page', page)
+      .set('size', size)
+
+    return this.http.get(this.baseUrl + '/list', { params });
   }
 }

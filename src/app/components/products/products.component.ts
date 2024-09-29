@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { NewProductComponent } from './inner-pages/new-product/new-product.component';
 import { UpdateProductComponent } from './inner-pages/update-product/update-product.component';
 import { ManageProductImageComponent } from './inner-pages/manage-product-image/manage-product-image.component';
 import { DeleteProductComponent } from './inner-pages/delete-product/delete-product.component';
+import { ProductService } from '../../service/product/product.service';
 
 @Component({
   selector: 'app-products',
@@ -13,8 +14,26 @@ import { DeleteProductComponent } from './inner-pages/delete-product/delete-prod
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+  readonly productService = inject(ProductService);
+
   constructor(private matDialog:MatDialog){
+  }
+
+  products: any[] = []
+
+  ngOnInit(): void {
+      this.getAll();
+  }
+
+  // get all products
+  getAll(){
+    this.productService.getAll('',0,10).subscribe(response => {
+      this.products = response;
+      console.log(this.products);
+    }, error => {
+      console.log(error?.error?.manage);
+    })
   }
 
   // add new product
