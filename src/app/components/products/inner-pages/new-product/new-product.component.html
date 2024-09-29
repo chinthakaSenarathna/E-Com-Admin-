@@ -1,29 +1,29 @@
 <h2 mat-dialog-title>Add New Product</h2>
-<form action="">
+<form [formGroup]="form" (ngSubmit)="create()">
     <mat-dialog-content class="mat-typography">
         <div class="row">
             <div class="col-12">
                 <label for="newProductDescription">Product Description</label>
-                <input type="text" class="form-control" id="newProductDescription">
+                <input type="text" formControlName="description" class="form-control" id="newProductDescription">
             </div>
         </div>
         <br/>
         <div class="row">
             <div class="col-12">
                 <label for="newProductUnitPrice">Product Unit-Price</label>
-                <input type="number" class="form-control" id="newProductUnitPrice">
+                <input type="number" formControlName="unitPrice" class="form-control" id="newProductUnitPrice">
             </div>
         </div>
         <br/>
         <div class="row">
             <div class="col-12">
                 <label for="newProductQTY">Product QTY on Hand</label>
-                <input type="text" class="form-control" id="newProductQTY">
+                <input type="text" formControlName="qty" class="form-control" id="newProductQTY">
             </div>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+      <button mat-button mat-dialog-close>Reset</button>
+      <button mat-button type="submit" cdkFocusInitial>Create New Product</button>
     </mat-dialog-actions>
 </form>
