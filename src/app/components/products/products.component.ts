@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NewProductComponent } from './inner-pages/new-product/new-product.component';
 import { UpdateProductComponent } from './inner-pages/update-product/update-product.component';
 import { ManageProductImageComponent } from './inner-pages/manage-product-image/manage-product-image.component';
+import { DeleteProductComponent } from './inner-pages/delete-product/delete-product.component';
 
 @Component({
   selector: 'app-products',
@@ -70,5 +71,21 @@ export class ProductsComponent {
         this.loadAllProducts();
       }
     });
+  }
+
+  // delete product
+  openDeleteConfirmationForm(product:any){
+    let matDialogRef = this.matDialog.open(DeleteProductComponent, {
+      width: '500px',
+      disableClose: true,
+      data: product
+    });
+
+    // after delete the product, have to load all products
+    matDialogRef.afterClosed().subscribe(response => {
+      if(response){
+        this.loadAllProducts();
+      }
+    })
   }
 }

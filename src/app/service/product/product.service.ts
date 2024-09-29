@@ -26,4 +26,8 @@ export class ProductService {
       description: obj.description
     });
   }
+
+  delete(id:string):Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 }

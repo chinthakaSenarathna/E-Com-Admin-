@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Add New Product</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-12">
+            <p>Are You Sure ???</p>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="close()">Reset</button>
+  <button mat-raised-button (click)="delete()" color="primary">Delete Product</button>
+</mat-dialog-actions>
