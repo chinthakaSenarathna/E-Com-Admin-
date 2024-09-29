@@ -1,10 +1,24 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>Add New Product</h2>
 <form action="">
     <mat-dialog-content class="mat-typography">
         <div class="raw">
             <div class="colomn-12">
-                <label for="newProductDescription">Description</label>
-                <input type="text" placeholder="desciption" id="newProductDescription">
+                <label for="newProductDescription">Product Description</label>
+                <input type="text" class="form-control" id="newProductDescription">
+            </div>
+        </div>
+        <br/>
+        <div class="raw">
+            <div class="colomn-12">
+                <label for="newProductUnitPrice">Product Unit-Price</label>
+                <input type="number" class="form-control" id="newProductUnitPrice">
+            </div>
+        </div>
+        <br/>
+        <div class="raw">
+            <div class="colomn-12">
+                <label for="newProductQTY">Product QTY on Hand</label>
+                <input type="text" class="form-control" id="newProductQTY">
             </div>
         </div>
     </mat-dialog-content>

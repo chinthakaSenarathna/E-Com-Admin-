@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { NewProductComponent } from './inner-pages/new-product/new-product.component';
 import { UpdateProductComponent } from './inner-pages/update-product/update-product.component';
+import { ManageProductImageComponent } from './inner-pages/manage-product-image/manage-product-image.component';
 
 @Component({
   selector: 'app-products',
@@ -15,17 +16,59 @@ export class ProductsComponent {
   constructor(private matDialog:MatDialog){
   }
 
+  // add new product
   openNewProductForm(){
-    this.matDialog.open(NewProductComponent,{
+    let matDialogRef = this.matDialog.open(NewProductComponent,{
       width: '500px',
       disableClose: true
     });
+  
+    // after adding the new product, products page refresh
+    matDialogRef.afterClosed().subscribe(response => {
+      if(response){
+        this.loadAllProducts();
+      }
+    });
+
   }
 
-  openUpdateProductForm(){
-    this.matDialog.open(UpdateProductComponent,{
+
+  loadAllProducts(){
+
+  }
+
+  
+  // update product
+  openUpdateProductForm(product:any){
+    let matDialogRef = this.matDialog.open(UpdateProductComponent,{
       width: '500px',
-      disableClose: true
-    })
+      disableClose: true,
+      // passed the data for update
+      data: product
+    });
+
+    // after updated the product, product page refresh
+    matDialogRef.afterClosed().subscribe(response => {
+      if(response){
+        this.loadAllProducts();
+      }
+    });
+
+  }
+
+  // manage product images
+  manageProductImage(product:any){
+    let matDialogRef = this.matDialog.open(ManageProductImageComponent,{
+      width: '500px',
+      disableClose: true,
+      data: product
+    });
+
+    // after manage the product image, load all products
+    matDialogRef.afterClosed().subscribe(response => {
+      if(response){
+        this.loadAllProducts();
+      }
+    });
   }
 }

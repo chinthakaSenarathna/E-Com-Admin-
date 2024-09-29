@@ -11,6 +11,7 @@
                 </div>
                 <div class="col-3">
                     <div class="d-flex justify-content-start">
+                        &nbsp;
                         <button class="btn btn-primary p-2" (click)="openNewProductForm()">+ New Product</button>
                     </div>
                 </div>
@@ -60,13 +61,13 @@
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    <mat-icon>photo_library</mat-icon>
+                                    <mat-icon (click)="manageProductImage('')">photo_library</mat-icon>
                                 </div>
                             </td>
                             <td>
                                 <div class="table-data-context">
                                     <mat-icon>delete</mat-icon>
-                                    <mat-icon (click)="openUpdateProductForm()">edit</mat-icon>
+                                    <mat-icon (click)="openUpdateProductForm('')">edit</mat-icon>
                                 </div>
                             </td>
                         </tr>
