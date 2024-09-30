@@ -46,7 +46,7 @@
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    {{ product.unitPrice }}
+                                    {{ product.unitPrice | currency: 'USD' }}
                                 </div>
                             </td>
                             <td>
@@ -61,19 +61,29 @@
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    <mat-icon (click)="manageProductImage('')">photo_library</mat-icon>
+                                    <mat-icon (click)="manageProductImage(product)">photo_library</mat-icon>
                                 </div>
                             </td>
                             <td>
                                 <div class="table-data-context">
-                                    <mat-icon (click)="openDeleteConfirmationForm('')">delete</mat-icon>
-                                    <mat-icon (click)="openUpdateProductForm('')">edit</mat-icon>
+                                    <mat-icon (click)="openDeleteConfirmationForm(product)">delete</mat-icon>
+                                    <mat-icon (click)="openUpdateProductForm(product)">edit</mat-icon>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <mat-paginator
+                [length]="count"
+                [pageIndex]="page"
+                [pageSize]="size"
+                [pageSizeOptions]="[5,10,15,20]"
+                (page)="getServerData($event)"
+            >
+            </mat-paginator>
+
         </div>
     </div>
 </div>

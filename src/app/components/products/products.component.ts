@@ -11,27 +11,29 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [MatIconModule, CommonModule, ReactiveFormsModule],
+  imports: [MatIconModule, CommonModule, ReactiveFormsModule, MatPaginatorModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
   readonly productService = inject(ProductService);
 
+  constructor(private matDialog:MatDialog){
+  }
+
   searchText = '';
   page:any = 0;
   size:any = 5;
+  count:any = 0;
 
   searchForm: FormGroup = new FormGroup({
     text: new FormControl('')
   });
-
-  constructor(private matDialog:MatDialog){
-  }
 
   products: GetAllProducts | null = null;
 
@@ -46,12 +48,19 @@ export class ProductsComponent implements OnInit {
   // load the all products
   loadAllProducts(){
     this.productService.getAll(this.searchText,this.page,this.size).subscribe(response => {
-      this.products = response
-      // console.log(this.products);
+      this.products = response;
+      this.count = this.products?.object.count;
+      // console.log(response);
 
     }, error => {
       console.log(error?.error?.manage);
     })
+  }
+
+  getServerData(data:PageEvent){
+    this.page = data?.pageIndex;
+    this.size = data?.pageSize;
+    this.loadAllProducts();
   }
 
   // add new product

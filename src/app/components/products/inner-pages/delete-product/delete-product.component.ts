@@ -15,7 +15,7 @@ export class DeleteProductComponent {
   readonly productService = inject(ProductService);
 
   delete(){
-    this.productService.delete('7104f48f-24d3-4f18-839e-f7495b514508').subscribe(response => {
+    this.productService.delete('').subscribe(response => {
       this.dialogRef.close(true);
     }, error => {
       console.log(error?.error?.message);
