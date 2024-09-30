@@ -6,31 +6,49 @@ import { UpdateProductComponent } from './inner-pages/update-product/update-prod
 import { ManageProductImageComponent } from './inner-pages/manage-product-image/manage-product-image.component';
 import { DeleteProductComponent } from './inner-pages/delete-product/delete-product.component';
 import { ProductService } from '../../service/product/product.service';
+import { GetAllProducts } from '../../interface/products/get-all-products';
+import { CommonModule } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, CommonModule, ReactiveFormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
   readonly productService = inject(ProductService);
 
+  searchText = '';
+  page:any = 0;
+  size:any = 5;
+
+  searchForm: FormGroup = new FormGroup({
+    text: new FormControl('')
+  });
+
   constructor(private matDialog:MatDialog){
   }
 
-  products: any[] = []
+  products: GetAllProducts | null = null;
 
   ngOnInit(): void {
-      this.getAll();
+    this.loadAllProducts();
+    this.searchForm.valueChanges.pipe(debounceTime(1000)).subscribe(data => {
+      this.searchText = data.text;
+      this.loadAllProducts();
+    });
   }
 
-  // get all products
-  getAll(){
-    this.productService.getAll('',0,10).subscribe(response => {
-      this.products = response;
-      console.log(this.products);
+  // load the all products
+  loadAllProducts(){
+    this.productService.getAll(this.searchText,this.page,this.size).subscribe(response => {
+      this.products = response
+      // console.log(this.products);
+
     }, error => {
       console.log(error?.error?.manage);
     })
@@ -49,11 +67,6 @@ export class ProductsComponent implements OnInit {
         this.loadAllProducts();
       }
     });
-
-  }
-
-
-  loadAllProducts(){
 
   }
 

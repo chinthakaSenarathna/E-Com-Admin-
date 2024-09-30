@@ -31,7 +31,7 @@ export class ProductService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
-  getAll(searchText:string, page:number, size:number):Observable<any>{
+  getAll(searchText:any, page:any, size:any):Observable<any>{
 
     // create HttpParams object
     let params = new HttpParams()
@@ -39,6 +39,6 @@ export class ProductService {
       .set('page', page)
       .set('size', size)
 
-    return this.http.get(this.baseUrl + '/list', { params });
+    return this.http.get(this.baseUrl + '/list', { params: params });
   }
 }
