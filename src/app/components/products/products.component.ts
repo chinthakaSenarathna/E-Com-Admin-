@@ -12,6 +12,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { ClipboardService } from '../../service/clipboard/clipboard.service';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +23,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 })
 export class ProductsComponent implements OnInit {
   readonly productService = inject(ProductService);
+  readonly clipboardService = inject(ClipboardService);
 
   constructor(private matDialog:MatDialog){
   }
@@ -61,6 +63,11 @@ export class ProductsComponent implements OnInit {
     this.page = data?.pageIndex;
     this.size = data?.pageSize;
     this.loadAllProducts();
+  }
+
+  // copy content
+  copyText(text:string){
+    this.clipboardService.copy(text);
   }
 
   // add new product

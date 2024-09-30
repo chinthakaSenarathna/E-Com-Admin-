@@ -36,7 +36,7 @@
                             <td>
                                 <div class="table-data-context">
                                     <p>{{ product.propertyId }}</p> &nbsp;
-                                    <mat-icon style="font-size: 15px;">content_copy</mat-icon>
+                                    <mat-icon style="font-size: 15px;" (click)="copyText(product.propertyId)">content_copy</mat-icon>
                                 </div>
                             </td>
                             <td>
