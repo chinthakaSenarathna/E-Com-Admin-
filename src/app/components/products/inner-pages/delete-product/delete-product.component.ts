@@ -13,7 +13,7 @@ import { ProductService } from '../../../../service/product/product.service';
 export class DeleteProductComponent {
   readonly dialogRef = inject(MatDialogRef<DeleteProductComponent>);
   readonly productService = inject(ProductService);
-  readonly data = inject(MAT_DIALOG_DATA);
+  readonly data = inject<any>(MAT_DIALOG_DATA);
 
   delete(){
     this.productService.delete(this.data.propertyId).subscribe(response => {
