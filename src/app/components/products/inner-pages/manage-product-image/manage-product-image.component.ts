@@ -3,11 +3,13 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { ProductService } from '../../../../service/product/product.service';
 import { error } from 'console';
 import { ProductImageService } from '../../../../service/product-image/product-image.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-product-image',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, ReactiveFormsModule],
   templateUrl: './manage-product-image.component.html',
   styleUrl: './manage-product-image.component.css'
 })
@@ -16,33 +18,22 @@ export class ManageProductImageComponent {
   readonly productImageService = inject(ProductImageService);
   readonly data = inject<any>(MAT_DIALOG_DATA);
 
-  selectedFile: File | null = null;
+  form = new FormGroup({
+    image: new FormControl(null, Validators.required)
+  });
 
-  onFileSelected(event: Event):void{
-    const input = event.target as HTMLInputElement;
-    if(input.files && input.files.length > 0){
-      this.selectedFile = input.files[0];
-      console.log('selected file : ',this.selectedFile);
-    }
+  loading:boolean = false;
+
+  image:any;
+
+  selectedFile(event:Event){
+    const inputFile = event.target as HTMLInputElement;
+    this.image = inputFile.files?.[0];
   }
 
-  onSubmit(event: Event):void{
-    event.preventDefault();
 
-    if(this.selectedFile){
-      const formData = new FormData();
-      formData.append('image',this.selectedFile);
 
-      // console.log(this.selectedFile);
-      // console.log(this.data.propertyId);
-
-      this.productImageService.uploadProductImage(formData,this.data.propertyId).subscribe(response => {
-        this.dialogRef.close(true);
-      }, error => {
-        console.log(error?.error?.message)
-      });
-    }
-  }
+  onSubmit(event:Event){}
 
   close(){
     this.dialogRef.close(false);
