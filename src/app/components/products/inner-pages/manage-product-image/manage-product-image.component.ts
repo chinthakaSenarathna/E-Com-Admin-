@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ProductService } from '../../../../service/product/product.service';
-import { error } from 'console';
 import { ProductImageService } from '../../../../service/product-image/product-image.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './manage-product-image.component.html',
   styleUrl: './manage-product-image.component.css'
 })
-export class ManageProductImageComponent {
+export class ManageProductImageComponent{
   readonly dialogRef = inject(MatDialogRef<ManageProductImageComponent>);
   readonly productImageService = inject(ProductImageService);
   readonly data = inject<any>(MAT_DIALOG_DATA);
@@ -28,14 +26,63 @@ export class ManageProductImageComponent {
 
   selectedFile(event:Event){
     const inputFile = event.target as HTMLInputElement;
-    if(inputFile.files && inputFile.files.length > 0){
-      this.image = inputFile.files[0];
+    // onnly can access, if not null
+    this.image = inputFile.files?.[0];
+    // file size validation
+    if(this.isFileSizeValid(this.image)){
+      if(this.isFileFormatValid(this.image)){
+        // this.handleFile(this.image);
+      }
+      else{
+        console.log("invalid format")
+        this.image = null;
+        inputFile.value = '';
+        return;
+      }
+    }
+    else{
+      console.log("invalid file size");
+      this.image = null;
+      inputFile.value = '';
+      return;
     }
   }
 
+  // preview... the image
+  handleFile(image:File):void{
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.image = reader.result;
+    }
 
+    reader.readAsDataURL(image);
+  }
 
-  onSubmit(event:Event){}
+  isFileSizeValid(image:File):boolean{
+    const maxSizeInByte = 5 * 1024 * 1024; // 5MB
+    return image.size <= maxSizeInByte;
+  }
+
+  isFileFormatValid(image:File):boolean{
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'pdf'];
+    const fileExtension = image.name.split('.').pop()?.toLowerCase();
+    return fileExtension && allowedExtensions.includes(fileExtension) ? true : false;
+
+  }
+
+  onSubmit(){
+    this.loading = true;
+    const formData = new FormData();
+    formData.append('image', this.image);
+    this.productImageService.uploadProductImage(formData, this.data.propertyId).subscribe(response => {
+      console.log(response);
+      this.dialogRef.close(true);
+      this.loading = false;
+    },error => {
+      console.log(error?.error?.message)
+      this.loading = false;
+    })
+  }
 
   close(){
     this.dialogRef.close(false);
