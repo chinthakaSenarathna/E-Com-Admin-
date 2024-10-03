@@ -9,9 +9,20 @@
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button (click)="close()">Cancel</button>
+      <button mat-button type="button" (click)="close()">Cancel</button>
       <button mat-button type="submit" cdkFocusInitial [disabled]="loading || form.invalid">Upload</button>
     </mat-dialog-actions>
 </form>
 <hr/>
-<h5 mat-dialog-title>Product Images</h5>
+<div class="outer-image">
+    <h2 mat-dialog-title>Product Images</h2>
+    <div class="" style="display: flex;justify-content: start;flex-wrap: wrap;gap: 5px;padding: 5px;">
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg" style="width: 100px; min-width: 100px; height: 100px; min-height: 100px; border-radius: 5px; padding: 5px;">
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg" style="width: 100px; min-width: 100px; height: 100px; min-height: 100px; border-radius: 5px; padding: 5px;">
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg" style="width: 100px; min-width: 100px; height: 100px; min-height: 100px; border-radius: 5px; padding: 5px;">
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg" style="width: 100px; min-width: 100px; height: 100px; min-height: 100px; border-radius: 5px; padding: 5px;">
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg" style="width: 100px; min-width: 100px; height: 100px; min-height: 100px; border-radius: 5px; padding: 5px;">
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg" style="width: 100px; min-width: 100px; height: 100px; min-height: 100px; border-radius: 5px; padding: 5px;">
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg" style="width: 100px; min-width: 100px; height: 100px; min-height: 100px; border-radius: 5px; padding: 5px;">
+    </div>
+</div>
