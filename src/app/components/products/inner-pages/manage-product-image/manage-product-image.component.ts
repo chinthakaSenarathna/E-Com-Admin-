@@ -28,7 +28,9 @@ export class ManageProductImageComponent {
 
   selectedFile(event:Event){
     const inputFile = event.target as HTMLInputElement;
-    this.image = inputFile.files?.[0];
+    if(inputFile.files && inputFile.files.length > 0){
+      this.image = inputFile.files[0];
+    }
   }
 
 
