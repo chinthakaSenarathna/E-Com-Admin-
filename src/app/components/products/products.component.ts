@@ -57,6 +57,7 @@ export class ProductsComponent implements OnInit {
   // load the all products
   loadAllProducts(){
     this.productService.getAll(this.searchText,this.page,this.size).subscribe(response => {
+      console.log(response);
       this.products = response;
       this.count = this.products?.object.count;
       // console.log(response);

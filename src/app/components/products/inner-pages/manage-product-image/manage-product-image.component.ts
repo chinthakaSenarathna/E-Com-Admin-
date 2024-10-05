@@ -1,20 +1,25 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ProductImageService } from '../../../../service/product-image/product-image.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-manage-product-image',
   standalone: true,
-  imports: [MatDialogModule, ReactiveFormsModule],
+  imports: [MatDialogModule, ReactiveFormsModule, CommonModule],
   templateUrl: './manage-product-image.component.html',
   styleUrl: './manage-product-image.component.css'
 })
-export class ManageProductImageComponent{
+export class ManageProductImageComponent implements OnInit{
   readonly dialogRef = inject(MatDialogRef<ManageProductImageComponent>);
   readonly productImageService = inject(ProductImageService);
   readonly data = inject<any>(MAT_DIALOG_DATA);
+
+  ngOnInit(): void {
+      console.log(this.data);
+  }
 
   form = new FormGroup({
     image: new FormControl(null, Validators.required)
