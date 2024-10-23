@@ -1,18 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  baseUrl = 'http://localhost:8001/api/v1/products';
+  baseUrl = environment.baseUrl;
 
   constructor(private http:HttpClient) { }
 
   create(obj:any):Observable<any>{
-    return this.http.post(this.baseUrl,{
+    return this.http.post(this.baseUrl + 'products',{
       qty: obj.qty,
       unitPrice: obj.unitPrice,
       description: obj.description
@@ -20,7 +21,7 @@ export class ProductService {
   }
 
   update(obj:any, id:string):Observable<any>{
-    return this.http.put(`${this.baseUrl}/${id}`, {
+    return this.http.put(`${this.baseUrl+'products'}/${id}`, {
       qty: obj.qty,
       unitPrice: obj.unitPrice,
       description: obj.description
@@ -28,7 +29,7 @@ export class ProductService {
   }
 
   delete(id:string):Observable<any>{
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl+'products'}/${id}`);
   }
 
   getAll(searchText:any, page:any, size:any):Observable<any>{
@@ -39,6 +40,6 @@ export class ProductService {
       .set('page', page)
       .set('size', size)
 
-    return this.http.get(this.baseUrl + '/list', { params: params });
+    return this.http.get(this.baseUrl + 'products' + '/list', { params: params });
   }
 }

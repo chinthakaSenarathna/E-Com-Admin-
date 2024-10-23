@@ -25,7 +25,7 @@ import { ForexService } from '../../service/forex/forex.service';
 export class ProductsComponent implements OnInit {
   readonly productService = inject(ProductService);
   readonly clipboardService = inject(ClipboardService);
-  readonly forexService = inject(ForexService);
+  // readonly forexService = inject(ForexService);
 
   constructor(private matDialog:MatDialog){
   }
@@ -34,7 +34,7 @@ export class ProductsComponent implements OnInit {
   page:any = 0;
   size:any = 5;
   count:any = 0;
-  rate:any = 0;
+  // rate:any = 0;
 
   searchForm: FormGroup = new FormGroup({
     text: new FormControl('')
@@ -43,11 +43,12 @@ export class ProductsComponent implements OnInit {
   products: GetAllProducts | null = null;
 
   ngOnInit(): void {
-    this.forexService.exchange('USD','LKR').subscribe(response => {
-      this.rate = response.result.LKR;
-      console.log(this.rate);
-    });
+    // this.forexService.exchange('USD','LKR').subscribe(response => {
+    //   this.rate = response.result.LKR;
+    //   console.log(this.rate);
+    // });
     this.loadAllProducts();
+    
     this.searchForm.valueChanges.pipe(debounceTime(1000)).subscribe(data => {
       this.searchText = data.text;
       this.loadAllProducts();
@@ -62,7 +63,7 @@ export class ProductsComponent implements OnInit {
       this.count = this.products?.object.count;
       // console.log(response);
     }, error => {
-      console.log(error?.error?.manage);
+      console.log(error?.error?.message);
     })
   }
 

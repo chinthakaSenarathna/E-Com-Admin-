@@ -4,12 +4,12 @@ export interface GetAllProducts {
     object: {
         count: number;
         dataList: Array<{
-        propertyId: string;
-        qty: number;
-        unitPrice: number;
-        description: string;
-        productImages: string[];
-        available: boolean;
-    }>;
+          propertyId: string;
+          qty: number;
+          unitPrice: number;
+          description: string;
+          productImages: string[];
+          available: boolean;
+        }>;
   };
 }
