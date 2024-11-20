@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,22 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  create(obj:any):Observable<any>{
+  register(obj:any):Observable<any>{
     return this.http.post(this.baseUrl + 'users/visitor/signup',{
       email: obj.email,
       displayName: obj.displayName,
       password: obj.password
     });
+  }
+
+  login(obj:any):Observable<any>{
+    return this.http.post("http://localhost:8002/login", {
+      username: obj.username,
+      password: obj.password
+    },{observe:'response' as 'body'})
+    .pipe(map(data => {
+      console.log(data);
+      return data;
+    }))
   }
 }

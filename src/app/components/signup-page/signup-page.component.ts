@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../service/user/user.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule],
   templateUrl: './signup-page.component.html',
   styleUrl: './signup-page.component.css'
 })
@@ -29,7 +29,7 @@ export class SignupPageComponent {
     ])
   })
 
-  create(){
+  register(){
     if(this.form.valid){
       const obj = {
         email: this.form.value.email,
@@ -37,7 +37,7 @@ export class SignupPageComponent {
         password: this.form.value.password
       }
 
-      this.userService.create(obj).subscribe(response => {
+      this.userService.register(obj).subscribe(response => {
         this.route.navigateByUrl('/login');
         alert('please login')
         // console.log(response);
