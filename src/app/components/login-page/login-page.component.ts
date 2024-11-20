@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../service/user/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { error } from 'console';
 import { first } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { CookiemanagerService } from '../../service/cookie/cookiemanager.service';
 
 @Component({
   selector: 'app-login-page',
@@ -17,7 +18,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginPageComponent {
   readonly userService = inject(UserService);
 
-  constructor(private cookieService:CookieService){}
+  constructor(private router:Router,private cookieManagerService:CookiemanagerService){}
 
   form = new FormGroup({
     username: new FormControl("",[
@@ -40,7 +41,9 @@ export class LoginPageComponent {
       this.userService.login(obj)
         .pipe(first())
         .subscribe((data:HttpResponse<any>) => {
-          console.log(data.headers.get('authorization'));
+          console.log(data.headers.get('Authorization'));
+          this.cookieManagerService.set(data?.headers?.get('Authorization')!);
+          this.router.navigateByUrl('/dashboard');
       }, error => {
         console.log(error?.error?.message);
       })

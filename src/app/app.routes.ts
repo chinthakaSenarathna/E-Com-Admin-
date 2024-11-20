@@ -6,6 +6,7 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { 
@@ -15,11 +16,13 @@ export const routes: Routes = [
     },
     { 
         path:'login', 
-        component:LoginPageComponent
+        component:LoginPageComponent,
+        canActivate:[authGuard]
     },
     {
         path:'signup',
-        component:SignupPageComponent
+        component:SignupPageComponent,
+        canActivate:[authGuard]
     },
     { 
         path:'dashboard', 
